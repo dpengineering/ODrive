@@ -12,20 +12,23 @@ Axis::Axis(const AxisHardwareConfig_t& hw_config,
            SensorlessEstimator& sensorless_estimator,
            Controller& controller,
            Motor& motor,
-           TrapezoidalTrajectory& trap)
+           TrapezoidalTrajectory& trap,
+           CycleTrigger& cycle_trigger)
     : hw_config_(hw_config),
       config_(config),
       encoder_(encoder),
       sensorless_estimator_(sensorless_estimator),
       controller_(controller),
       motor_(motor),
-      trap_(trap)
+      trap_(trap),
+      cycle_trigger_(cycle_trigger)
 {
     encoder_.axis_ = this;
     sensorless_estimator_.axis_ = this;
     controller_.axis_ = this;
     motor_.axis_ = this;
     trap_.axis_ = this;
+    cycle_trigger_.axis_ = this;
 
     decode_step_dir_pins();
 }
@@ -154,7 +157,7 @@ bool Axis::run_sensorless_spin_up() {
     });
     if (error_ != ERROR_NONE)
         return false;
-    
+
     // Late Spin-up: accelerate
     float vel = config_.ramp_up_distance / config_.ramp_up_time;
     float phase = wrap_pm_pi(config_.ramp_up_distance);
@@ -235,7 +238,7 @@ void Axis::run_state_machine_loop() {
 
     // arm!
     motor_.arm();
-    
+
     for (;;) {
         // Load the task chain if a specific request is pending
         if (requested_state_ != AXIS_STATE_UNDEFINED) {

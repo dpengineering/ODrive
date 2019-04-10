@@ -164,6 +164,7 @@ build{
         'MotorControl/axis.cpp',
         'MotorControl/motor.cpp',
         'MotorControl/encoder.cpp',
+        'MotorControl/cycletrigger.cpp',
         'MotorControl/controller.cpp',
         'MotorControl/sensorless_estimator.cpp',
         'MotorControl/trapTraj.cpp',

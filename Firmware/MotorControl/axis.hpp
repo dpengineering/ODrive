@@ -15,7 +15,7 @@ public:
         ERROR_CURRENT_MEASUREMENT_TIMEOUT = 0x08,
         ERROR_BRAKE_RESISTOR_DISARMED = 0x10, //<! the brake resistor was unexpectedly disarmed
         ERROR_MOTOR_DISARMED = 0x20, //<! the motor was unexpectedly disarmed
-        ERROR_MOTOR_FAILED = 0x40, // Go to motor.hpp for information, check odrvX.axisX.motor.error for error value 
+        ERROR_MOTOR_FAILED = 0x40, // Go to motor.hpp for information, check odrvX.axisX.motor.error for error value
         ERROR_SENSORLESS_ESTIMATOR_FAILED = 0x80,
         ERROR_ENCODER_FAILED = 0x100, // Go to encoder.hpp for information, check odrvX.axisX.encoder.error for error value
         ERROR_CONTROLLER_FAILED = 0x200,
@@ -69,7 +69,8 @@ public:
             SensorlessEstimator& sensorless_estimator,
             Controller& controller,
             Motor& motor,
-            TrapezoidalTrajectory& trap);
+            TrapezoidalTrajectory& trap,
+            CycleTrigger& cycle_trigger);
 
     void setup();
     void start_thread();
@@ -120,8 +121,8 @@ public:
             bool checks_ok = do_checks();
             // Update all estimators
             // Note: updates run even if checks fail
-            bool updates_ok = do_updates(); 
-            
+            bool updates_ok = do_updates();
+
             if (!checks_ok || !updates_ok) {
                 // It's not useful to quit idle since that is the safe action
                 // Also leaving idle would rearm the motors
@@ -166,6 +167,7 @@ public:
     Controller& controller_;
     Motor& motor_;
     TrapezoidalTrajectory& trap_;
+    CycleTrigger& cycle_trigger_;
 
     osThreadId thread_id_;
     volatile bool thread_id_valid_ = false;
@@ -215,7 +217,8 @@ public:
             make_protocol_object("controller", controller_.make_protocol_definitions()),
             make_protocol_object("encoder", encoder_.make_protocol_definitions()),
             make_protocol_object("sensorless_estimator", sensorless_estimator_.make_protocol_definitions()),
-            make_protocol_object("trap_traj", trap_.make_protocol_definitions())
+            make_protocol_object("trap_traj", trap_.make_protocol_definitions()),
+            make_protocol_object("cycle_trigger", cycle_trigger_.make_protocol_definitions())
         );
     }
 };
