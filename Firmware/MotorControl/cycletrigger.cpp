@@ -8,6 +8,8 @@ void CycleTrigger::set_enabled(bool enable) {
     uint16_t gpio_pin = get_gpio_pin_by_pin(config_.gpio_pin_num);
     GPIO_TypeDef* gpio_port = get_gpio_port_by_pin(config_.gpio_pin_num);
     if (enable) {
+        last_edge_hit_.has_hit = false;
+        last_edge_hit_.hit_location = 0;
         HAL_GPIO_DeInit(gpio_port, gpio_pin);
         GPIO_subscribe(gpio_port, gpio_pin,
                        config_.invert_pin ? GPIO_PULLUP : GPIO_PULLDOWN,

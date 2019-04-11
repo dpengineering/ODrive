@@ -10,8 +10,8 @@ public:
     };
 
     struct Hit_t {
-        int32_t hit_location;
-        bool has_hit;
+        int32_t hit_location = 0;
+        bool has_hit = false;
     };
 
     CycleTrigger(CycleTrigger::Config_t &config);
