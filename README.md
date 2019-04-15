@@ -2,14 +2,14 @@
 
 This project is all about accurately driving brushless motors, for cheap. The aim is to make it possible to use inexpensive brushless motors in high performance robotics projects, like [this](https://www.youtube.com/watch?v=WT4E5nb3KtY).
 
-| Branch | Build Status |
-|--------|--------------|
-| master | [![Build Status](https://travis-ci.org/madcowswe/ODrive.png?branch=master)](https://travis-ci.org/madcowswe/ODrive) |
-| devel  | [![Build Status](https://travis-ci.org/madcowswe/ODrive.png?branch=devel)](https://travis-ci.org/madcowswe/ODrive) |
-
-
 Please refer to the [Developer Guide](https://docs.odriverobotics.com/developer-guide) to get started with ODrive firmware development.
 
+NOTE: You may need to install the following debs instead of the ones installed by default by apt:
+
+* https://packages.ubuntu.com/cosmic/all/libnewlib-dev/download
+* https://packages.ubuntu.com/cosmic/all/libnewlib-arm-none-eabi/download
+
+(Download and install with `dpkg -i libnewlib-*`)
 
 ### Repository Structure
  * **Firmware**: ODrive firmware
