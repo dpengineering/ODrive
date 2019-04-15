@@ -29,7 +29,3 @@ void CycleTrigger::trigger() {
     last_edge_hit_.has_hit = true;
     last_edge_hit_.hit_location = axis_->encoder_.shadow_count_;
 }
-
-bool CycleTrigger::get_state() {
-    return trigger_state_;
-}

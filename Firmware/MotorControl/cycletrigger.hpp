@@ -23,15 +23,11 @@ public:
     void reload_enabled();
 
     void trigger();
-    bool get_state();
-
-    bool trigger_state_ = false;
 
     Hit_t last_edge_hit_;
 
     auto make_protocol_definitions() {
         return make_protocol_member_list(
-                   make_protocol_ro_property("trigger_state", &trigger_state_),
                    make_protocol_object("config",
                        make_protocol_property("enabled", &config_.enabled,
                            [](void *ctx) { static_cast<CycleTrigger *>(ctx)->reload_enabled(); }, this),
