@@ -75,7 +75,7 @@ extern UART_HandleTypeDef huart4;
 extern TIM_HandleTypeDef htim14;
 
 /******************************************************************************/
-/*            Cortex-M4 Processor Interruption and Exception Handlers         */ 
+/*            Cortex-M4 Processor Interruption and Exception Handlers         */
 /******************************************************************************/
 
 /**
@@ -499,6 +499,14 @@ void EXTI0_IRQHandler(void)
 }
 
 /**
+* @brief This function handles EXTI line1 interrupt.
+*/
+void EXTI1_IRQHandler(void)
+{
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
+}
+
+/**
 * @brief This function handles EXTI line2 interrupt.
 */
 void EXTI2_IRQHandler(void)
@@ -527,7 +535,7 @@ void EXTI4_IRQHandler(void)
 */
 void EXTI9_5_IRQHandler(void)
 {
-  // The true source of the interrupt is checked inside HAL_GPIO_EXTI_IRQHandler() 
+  // The true source of the interrupt is checked inside HAL_GPIO_EXTI_IRQHandler()
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_5);
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_6);
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_7);
@@ -540,7 +548,7 @@ void EXTI9_5_IRQHandler(void)
 */
 void EXTI15_10_IRQHandler(void)
 {
-  // The true source of the interrupt is checked inside HAL_GPIO_EXTI_IRQHandler() 
+  // The true source of the interrupt is checked inside HAL_GPIO_EXTI_IRQHandler()
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_10);
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_11);
   HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_12);
