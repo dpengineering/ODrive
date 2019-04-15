@@ -34,7 +34,7 @@ public:
                        make_protocol_property("gpio_pin_num", &config_.gpio_pin_num),
                        make_protocol_property("invert_pin", &config_.invert_pin)),
                    make_protocol_object("last_edge_hit",
-                       make_protocol_ro_property("hit_location", &last_edge_hit_.hit_location),
+                       make_protocol_property("hit_location", &last_edge_hit_.hit_location),
                        make_protocol_ro_property("has_hit", &last_edge_hit_.has_hit)));
     }
 };
