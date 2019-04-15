@@ -21,13 +21,13 @@ flash: all
 		-c exit
 
 gdb: all
-	arm-none-eabi-gdb $(FIRMWARE) -x openocd.gdbinit
+	gdb-multiarch $(FIRMWARE) -x openocd.gdbinit
 
 dfu: all
 	python ../tools/odrivetool $(if $(value SERIAL_NUMBER),--serial-number $(SERIAL_NUMBER),) dfu $(FIRMWARE_HEX)
 
 bmp: all
-	arm-none-eabi-gdb --ex 'target extended-remote /dev/stlink' \
+	gdb-multiarch --ex 'target extended-remote /dev/stlink' \
 		--ex 'monitor swdp_scan' \
 		--ex 'attach 1' \
 		--ex 'load' $(FIRMWARE)
